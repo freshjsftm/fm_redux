@@ -25,5 +25,4 @@ const mapDispatchToProps = (dispatch) => ({
   createTaskAction: (values)=> dispatch(createTask(values))
 })
 
-
 export default connect(undefined, mapDispatchToProps)(TaskForm);

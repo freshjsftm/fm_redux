@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import * as TodoCreators from '../actions/todoCreators';
 
 const TodoList = (props) => {
-  const {tasks, updateTaskAction, deleteTaskAction } = props;
-  
+  const {tasks, updateTaskAction, deleteTaskAction } = props; 
   return (
     <section>
       <h2>Todo</h2>
