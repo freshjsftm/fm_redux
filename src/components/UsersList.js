@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import * as UserActionCreators from '../actions/userCreators';
 
 const UsersList = (props) => {
-  const {users, isFetching, error} = props;
+  const {users, isFetching, error, getUsersReq} = props;
+  useEffect(() => { getUsersReq() }, [getUsersReq]);
   return (
     <section>
       <h2>Users list</h2>
@@ -11,8 +13,13 @@ const UsersList = (props) => {
       <ul>
         {users.map(u=>(<li key={u.id}>{u.email}</li>))}
       </ul>
+      <button onClick={()=>{getUsersReq({offset:users.length})}}>load more</button>
     </section>
   );
 }
 const mapStateToProps = ({users})=>users;
-export default connect(mapStateToProps)(UsersList);
+const mapDispatchToProps = (dispatch) => ({
+  getUsersReq:({limit, offset}={})=>dispatch(UserActionCreators.getUsersRequest({limit, offset}))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersList);

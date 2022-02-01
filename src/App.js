@@ -9,13 +9,14 @@ function App(props) {
   return (
     <div>
       <UserForm />
+      <hr/>
       <UsersList />
       <hr/>
-     <Counter />
+     {/* <Counter /> */}
      <hr/>
-     <TaskForm />
+     {/* <TaskForm /> */}
      <hr/>
-     <TodoList />
+     {/* <TodoList /> */}
     </div>
   );
 }
