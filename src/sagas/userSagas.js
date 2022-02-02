@@ -4,10 +4,10 @@ import * as UserActionCreators from '../actions/userCreators';
 
 export function * createUserSaga(action){
   try {
-    const {data:{data:[user]}} = yield API.createUser(action.values)
-    yield put(UserActionCreators.createUserSuccess(user))
+    const {data:{data:[user]}} = yield API.createUser(action.payload.values)
+    yield put(UserActionCreators.createUserSuccess({user}))
   } catch (error) {
-    yield put(UserActionCreators.createUserError(error))
+    yield put(UserActionCreators.createUserError({error}))
   }
 }
 
