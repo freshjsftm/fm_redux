@@ -12,9 +12,13 @@ const handleRequest = produce((draftState, action)=>{
 const handleError = produce((draftState, action)=>{
   const {payload:{error}} = action;
   draftState.error=error;
+  draftState.isFetching=false;
 })
 
 const handlers = {
+  [ACTION_TYPES.CLEAR_USER_ERROR]:produce((draftState, action)=>{
+    draftState.error=null;
+  }),
   [ACTION_TYPES.GET_USERS_REQUEST]:handleRequest,
   [ACTION_TYPES.CREATE_USER_REQUEST]:handleRequest,
   [ACTION_TYPES.GET_USERS_SUCCESS]:produce((draftState, action)=>{

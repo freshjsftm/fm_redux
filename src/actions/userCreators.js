@@ -1,5 +1,8 @@
 import ACTION_TYPES from "./actionTypes";
 
+export const clearUserError = ()=>({
+  type:ACTION_TYPES.CLEAR_USER_ERROR
+})
 export const getUsersRequest = ({limit, offset})=>({
   type:ACTION_TYPES.GET_USERS_REQUEST,
   payload:{limit, offset}
@@ -12,8 +15,6 @@ export const getUsersError = ({error})=>({
   type:ACTION_TYPES.GET_USERS_ERROR,
   payload:{error}
 })
-
-
 export const createUserRequest = ({values})=>({
   type:ACTION_TYPES.CREATE_USER_REQUEST,
   payload:{values}
