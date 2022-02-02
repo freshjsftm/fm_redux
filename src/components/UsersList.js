@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as UserActionCreators from '../actions/userCreators';
 
 const UsersList = (props) => {
-  const {users, isFetching, error, getUsersReq} = props;
-  useEffect(() => { getUsersReq() }, [getUsersReq]);
+  const {users, isFetching, error} = useSelector(({users})=>users);
+  const dispatch = useDispatch();
+  const getUsersReq = ({limit, offset}={})=>dispatch(UserActionCreators.getUsersRequest({limit, offset}));
+  useEffect(() => { getUsersReq() }, []);
   return (
     <section>
       <h2>Users list</h2>
@@ -17,9 +19,5 @@ const UsersList = (props) => {
     </section>
   );
 }
-const mapStateToProps = ({users})=>users;
-const mapDispatchToProps = (dispatch) => ({
-  getUsersReq:({limit, offset}={})=>dispatch(UserActionCreators.getUsersRequest({limit, offset}))
-})
+export default UsersList;
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
