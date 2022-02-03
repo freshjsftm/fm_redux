@@ -1,23 +1,35 @@
-import Counter from "./components/Counter";
-import TaskForm from "./components/TaskForm";
-import TodoList from "./components/TodoList";
-import UserForm from "./components/UserForm";
-import UsersList from "./components/UsersList";
+import {Suspense, lazy} from 'react';
+import {BrowserRouter, Routes, Route, NavLink} from 'react-router-dom';
 
+const UserPage = lazy(() => import('./pages/userPage'));
+const TodoPage = lazy(() => import('./pages/todoPage'));
+const CounterPage = lazy(() => import('./pages/counterPage'));
 
 function App(props) {
   return (
-    <div>
-      <UserForm />
-      <hr/>
-      <UsersList />
-      <hr/>
-     {/* <Counter /> */}
-     <hr/>
-     {/* <TaskForm /> */}
-     <hr/>
-     {/* <TodoList /> */}
-    </div>
+    <BrowserRouter>
+    
+    <nav>
+      <ul>
+        <li>
+          <NavLink to="/">Home</NavLink> 
+        </li>
+        <li>
+          <NavLink to="/todo">todo</NavLink>
+        </li>
+        <li>
+          <NavLink to="/counter">counter</NavLink>
+        </li>
+      </ul>
+    </nav>
+    <Suspense fallback={'Loading...'} >
+      <Routes>
+        <Route path="/" element={<UserPage />}/>
+        <Route path="/todo" element={<TodoPage />}/>
+        <Route path="/counter" element={<CounterPage />}/>
+      </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
